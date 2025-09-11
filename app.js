@@ -33,6 +33,7 @@ app.post("/webhook", async (req, res) => {
     return res.status(401).send("Invalid signature");
   }
 
+  console.log("✅ Webhook received");
   const event = req.headers["x-github-event"];
   const payload = req.body;
 
