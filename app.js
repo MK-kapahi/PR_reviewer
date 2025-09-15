@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 3000;
 // ✅ Webhook endpoint
 app.post("/webhook", async (req, res) => {
   console.log("✅ Webhook received",req);
-  console.log("webhook successfylly running ")
+  console.log("webhook successfylly running yooooooooooooo")
   if (!verifySignature(req)) {
     return res.status(401).send("Invalid signature");
   }
