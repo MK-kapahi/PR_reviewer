@@ -29,11 +29,11 @@ const PORT = process.env.PORT || 3000;
 
 // ✅ Webhook endpoint
 app.post("/webhook", async (req, res) => {
+  console.log("✅ Webhook received",req);
   if (!verifySignature(req)) {
     return res.status(401).send("Invalid signature");
   }
 
-  console.log("✅ Webhook received");
   const event = req.headers["x-github-event"];
   const payload = req.body;
 
