@@ -38,7 +38,7 @@ function verifySignature(req) {
 
 // ✅ Webhook endpoint
 app.post("/webhook", async (req, res) => {
-  console.log("✅ Webhook received",req);
+  // console.log("✅ Webhook received",req);
 
   if (!verifySignature(req)) {
     return res.status(401).send("Invalid signature");
