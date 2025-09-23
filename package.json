@@ -19,6 +19,8 @@
   "homepage": "https://github.com/MK-kapahi/PR_reviewer#readme",
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.890.0",
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
