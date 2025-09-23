@@ -59,7 +59,7 @@ app.post("/webhook", async (req, res) => {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     }).then((res) => res.text());
 
-    console.log("PR Diff fetched",diffText);
+    console.log("PR Diff fetched", diffText);
 
     // ✅ Create review prompt
     const reviewPrompt = `
@@ -85,7 +85,20 @@ ${diffText}
         response.output?.message?.content?.[0]?.text || "⚠️ No review generated";
 
       console.log("🤖 AI Review:\n", review);
+      console.log("Posting review to GitHub...", payload.pull_request.comments_url);
+      const reviewUrl = `${payload.pull_request.url}/reviews`;
+      await fetch(reviewUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+          Accept: "application/vnd.github+json",
+        },
+        body: JSON.stringify({
+          body: `🤖 **AI Code Review**\n\n${review}`,
+        }),
+      });
 
+      console.log("✅ Review posted to GitHub PR");
       // Show result to GitHub (for now just return in response)
       return res.status(200).send({
         message: "PR review generated ✅",
